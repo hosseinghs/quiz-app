@@ -26,7 +26,7 @@
 import { ref, computed } from "vue";
 
 export default {
-  setup() {
+  setup(_, context) {
     const questions = [
       {
         q: "What is 2 + 2 ?",
@@ -114,7 +114,8 @@ export default {
     };
 
     const endGame = () => {
-      console.log("give the user point");
+      const score = (numberOfCorrectAnswers.value / questions.length) * 100;
+      context.emit("gameIsOver", score.toFixed());
     };
 
     return {
