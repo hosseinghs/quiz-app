@@ -1,6 +1,6 @@
 <template>
   <Questions v-if="!isTheGameOver" @gameIsOver="showResult($event)" />
-  <Result v-else />
+  <Result :score="score" v-else />
 </template>
 
 <script>
