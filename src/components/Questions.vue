@@ -95,14 +95,26 @@ export default {
     ];
     const userAnswers = [];
     const index = ref(0);
-    
+    const numberOfCorrectAnswers = ref(0);
+
     const currentQuestion = computed(() => {
       return questions[index.value];
     });
 
     const submitAnswer = (answer) => {
-      index.value++;
       userAnswers.push(answer);
+      checkCorrectAnswer(answer);
+      if (questions.length === userAnswers.length) endGame();
+      else index.value++;
+    };
+
+    const checkCorrectAnswer = (answer) => {
+      if (!answer) return;
+      answer.isCorrect && ++numberOfCorrectAnswers.value;
+    };
+
+    const endGame = () => {
+      console.log("give the user point");
     };
 
     return {
