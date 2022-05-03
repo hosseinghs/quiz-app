@@ -1,14 +1,31 @@
 <template>
-  <Questions />
-  <Result />
+  <Questions v-if="!isTheGameOver" @gameIsOver="showResult($event)" />
+  <Result v-else />
 </template>
 
 <script>
 import Questions from "@/components/Questions";
 import Result from "@/components/Result";
+import { ref } from "vue";
 
 export default {
   name: "App",
+
+  setup() {
+    const isTheGameOver = ref(false);
+    const score = ref(null);
+
+    const showResult = (_score) => {
+      score.value = _score;
+      isTheGameOver.value = true;
+    };
+
+    return {
+      score,
+      showResult,
+      isTheGameOver,
+    };
+  },
 
   components: {
     Questions,
