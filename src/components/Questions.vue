@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 export default {
   setup() {
@@ -95,7 +95,10 @@ export default {
     ];
     const userAnswers = [];
     const index = ref(0);
-    const currentQuestion = ref(questions[index.value]);
+    
+    const currentQuestion = computed(() => {
+      return questions[index.value];
+    });
 
     const submitAnswer = (answer) => {
       index.value++;
