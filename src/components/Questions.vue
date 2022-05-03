@@ -13,7 +13,7 @@
           v-for="(answer, i) in currentQuestion.answers"
           :key="i"
           class="answer"
-          @click.stop="checkAnswer(answer)"
+          @click.stop="submitAnswer(answer)"
         >
           {{ answer.text }}
         </div>
@@ -97,7 +97,7 @@ export default {
     const index = ref(0);
     const currentQuestion = ref(questions[index.value]);
 
-    const checkAnswer = (answer) => {
+    const submitAnswer = (answer) => {
       index.value++;
       userAnswers.push(answer);
     };
@@ -105,7 +105,7 @@ export default {
     return {
       index,
       currentQuestion,
-      checkAnswer,
+      submitAnswer,
     };
   },
 };
