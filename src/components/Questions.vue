@@ -93,16 +93,17 @@ export default {
         ],
       },
     ];
-    let questionIndex = ref(0);
-    const currentQuestion = ref(questions[questionIndex.value]);
-    console.log(currentQuestion);
+    const userAnswers = [];
+    const index = ref(0);
+    const currentQuestion = ref(questions[index.value]);
+
     const checkAnswer = (answer) => {
-      console.log(answer.isCorrect);
-      questionIndex.value++;
-      console.log(currentQuestion);
+      index.value++;
+      userAnswers.push(answer);
     };
+
     return {
-      questionIndex,
+      index,
       currentQuestion,
       checkAnswer,
     };
