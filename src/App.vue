@@ -1,6 +1,8 @@
 <template>
-  <Questions v-if="!isTheGameOver" @gameIsOver="showResult($event)" />
-  <Result :score="score" v-else />
+  <Transition name="fade" duration="300" mode="out-in">
+    <Questions v-if="!isTheGameOver" @gameIsOver="showResult($event)" />
+    <Result v-else :score="score" />
+  </Transition>
 </template>
 
 <script>
@@ -42,5 +44,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
