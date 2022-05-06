@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ProgressBar />
     <div class="ctr">
       <div class="questions-ctr">
         <div class="progress">
@@ -26,39 +25,18 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import { useQuestionStore } from "@/store/questions";
-import ProgressBar from "@/components/ProgressBar.vue";
-
 export default {
-  components: { ProgressBar },
-
   setup(_, context) {
-    const store = useQuestionStore();
-    const questions = store.questions;
-    const answeredQuestions = ref(0);
-    const index = ref(0);
-    const numberOfCorrectAnswers = ref(0);
-
-    const currentQuestion = computed(() => {
-      return questions[index.value];
-    });
-    const submitAnswer = (answer) => {
-      ++answeredQuestions.value;
-      checkCorrectAnswer(answer);
-      if (questions.length === answeredQuestions.value) endGame();
-      else index.value++;
-    };
-    const checkCorrectAnswer = (answer) => {
+    function submitAnswer(answer) {
       if (!answer) return;
-      answer.isCorrect && ++numberOfCorrectAnswers.value;
+      context.emit("submitAnswer", answer);
+    }
+
+    return {
+      submitAnswer,
     };
-    const endGame = () => {
-      const score = (numberOfCorrectAnswers.value / questions.length) * 100;
-      context.emit("gameIsOver", score.toFixed());
-    };
-    return { index, currentQuestion, submitAnswer };
   },
+  props: ["questions", "currentQuestion"],
 };
 </script>
 
