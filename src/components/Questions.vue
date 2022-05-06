@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <div class="ctr">
-      <div class="questions-ctr">
-        <div class="progress">
-          <div class="bar"></div>
-          <div class="status"></div>
-        </div>
+  <div class="ctr">
+    <div class="questions-ctr">
+      <div class="progress">
+        <div class="bar"></div>
+        <div class="status"></div>
       </div>
-      <div class="single-question">
-        <div class="question">{{ currentQuestion.q }}</div>
-        <div class="answers">
-          <div
-            v-for="(answer, i) in currentQuestion.answers"
-            :key="i"
-            class="answer"
-            @click.stop="submitAnswer(answer)"
-          >
-            {{ answer.text }}
-          </div>
+    </div>
+    <div class="single-question">
+      <div class="question">{{ currentQuestion.q }}</div>
+      <div class="answers">
+        <div
+          v-for="(answer, i) in currentQuestion.answers"
+          :key="i"
+          class="answer"
+          @click.stop="submitAnswer(answer)"
+        >
+          {{ answer.text }}
         </div>
       </div>
     </div>
