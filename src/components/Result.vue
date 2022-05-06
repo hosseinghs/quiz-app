@@ -1,7 +1,7 @@
 <template>
-  <div class="result">
-    <div class="title">{{ finalResult.title }}</div>
-    <div class="desc">{{ finalResult.desc }}</div>
+  <div class="result" :class="finalResult.res.passed ? 'passed' : 'failed'">
+    <div class="title">{{ finalResult.res.title }}</div>
+    <div class="desc">{{ finalResult.res.desc }}</div>
   </div>
 </template>
 
@@ -29,7 +29,15 @@ export default {
     const _score = computed(() => props.score);
 
     const finalResult = computed(() =>
-      _score.value > 66 ? results[0] : results[1]
+      _score.value > 66
+        ? {
+            passed: true,
+            res: results[0],
+          }
+        : {
+            passed: false,
+            res: results[1],
+          }
     );
 
     return {
@@ -39,4 +47,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.failed {
+  color: red;
+}
+
+.passed {
+  color: green;
+}
+</style>
