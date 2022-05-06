@@ -1,5 +1,5 @@
 <template>
-  <div class="result" :class="finalResult.res.passed ? 'passed' : 'failed'">
+  <div class="result" :class="finalResult.passed ? 'passed' : 'failed'">
     <div class="title">{{ finalResult.res.title }}</div>
     <div class="desc">{{ finalResult.res.desc }}</div>
   </div>
