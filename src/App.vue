@@ -1,13 +1,19 @@
 <template>
-  <Transition name="fade" duration="300" mode="out-in">
-    <Questions
-      v-if="!isTheGameOver"
-      :questions="questions"
-      :currentQuestion="currentQuestion"
-      @submitAnswer="submitAnswer($event)"
+  <div>
+    <ProgressBar
+      :questions-count="questions.length"
+      :Answered-questions-count="answeredQuestions"
     />
-    <Result v-else :score="score" />
-  </Transition>
+    <Transition name="fade" duration="300" mode="out-in">
+      <Questions
+        v-if="!isTheGameOver"
+        :questions="questions"
+        :current-question="currentQuestion"
+        @submitAnswer="submitAnswer($event)"
+      />
+      <Result v-else :score="score" />
+    </Transition>
+  </div>
 </template>
 
 <script>
@@ -15,6 +21,7 @@ import Questions from "@/components/Questions";
 import Result from "@/components/Result";
 import { ref, computed } from "vue";
 import { useQuestionStore } from "@/store/questions";
+import ProgressBar from "./components/ProgressBar.vue";
 
 export default {
   name: "App",
@@ -60,12 +67,14 @@ export default {
       showResult,
       submitAnswer,
       isTheGameOver,
+      answeredQuestions,
     };
   },
 
   components: {
     Questions,
     Result,
+    ProgressBar,
   },
 };
 </script>
