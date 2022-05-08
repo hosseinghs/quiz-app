@@ -1,7 +1,7 @@
 <template>
   <div class="progress-bar">
     <div class="progress">
-      {{}} questions of out {{}}
+      {{ AnsweredQuestionsCount }} questions of out {{ questionsCount }}
     </div>
   </div>
 </template>
@@ -23,4 +23,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.progress-bar {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: ghostwhite;
+}
+</style>
